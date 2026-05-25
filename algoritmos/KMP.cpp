@@ -1,9 +1,11 @@
 #include "KMP.hpp"
+#include <iostream>
+#include <fstream>
 
-KMP::KMP(std::string palavra)
-{
+using namespace std;
+
+KMP::KMP(string palavra){
     this->palavra = palavra;
-
     construirAFD();
 }
 
@@ -11,8 +13,7 @@ void KMP::construirAFD()
 {
     int N = palavra.size();
 
-
-    transicao.resize(256, std::vector<int>(N+1, 0));
+    transicao.resize(256, vector<int>(N+1, 0));
 
     transicao[(unsigned char)palavra[0]][0] = 1;
 
@@ -27,15 +28,15 @@ void KMP::construirAFD()
     }
 }
 
-std::vector<int> KMP::buscar(std::string texto)
+vector<int> KMP::buscar(const string& texto)
 {
-    std::vector<int> indices;
+    vector<int> indices;
 
     int estado = 0;
 
     int N = palavra.size();
 
-    for(int i = 0; i < texto.size(); i++){
+    for(int i = 0; i < int(texto.size()); i++){
         estado = transicao[(unsigned char)texto[i]][estado];
         if(estado == N){
         indices.push_back(i-N+1);

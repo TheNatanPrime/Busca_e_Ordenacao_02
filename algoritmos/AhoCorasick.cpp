@@ -1,7 +1,9 @@
 #include "AhoCorasick.hpp"
-
-#include <queue>
 #include <iostream>
+#include <fstream>
+#include <queue>
+
+using namespace std;
 
 AhoCorasick::AhoCorasick()
 {
@@ -9,7 +11,7 @@ AhoCorasick::AhoCorasick()
     raiz = new No(contadorEstados++);
 }
 
-void AhoCorasick::inserir(std::string palavra)
+void AhoCorasick::inserir(const string& palavra)
 {
     No* atual = raiz;
 
@@ -27,7 +29,7 @@ void AhoCorasick::inserir(std::string palavra)
 
 void AhoCorasick::construirFalhas()
 {
-    std::queue<No*> fila;
+    queue<No*> fila;
     raiz->falha = raiz;
 
     for(auto par : raiz->filhos)
@@ -63,7 +65,7 @@ void AhoCorasick::construirFalhas()
             {
                 filho->falha = raiz;
             }
-            for(std::string s : filho->falha->saidas)
+            for(string s : filho->falha->saidas)
             {
                 filho->saidas.push_back(s);
             }
@@ -73,11 +75,11 @@ void AhoCorasick::construirFalhas()
 
 }
 
-void AhoCorasick::buscar(std::string texto){
+void AhoCorasick::buscar(const string& texto){
 
     No* atual = raiz;
 
-    for(int i = 0; i < texto.size(); i++){
+    for(int i = 0; i < int(texto.size()); i++){
         char c = texto[i];
 
         while(atual != raiz && atual->filhos.find(c) == atual->filhos.end()){
@@ -88,8 +90,9 @@ void AhoCorasick::buscar(std::string texto){
         atual = atual->filhos[c];
         }
 
-        for(std::string palavra : atual->saidas){
-        std::cout<< "Palavra "<< palavra << " encontrada no indice "<< i-palavra.size()+ 1 << std::endl;
+        for(string palavra : atual->saidas){
+        cout<< "Palavra "<< palavra << " encontrada no indice "<< i-palavra.size()+ 1 << endl;
         }
     }
 }
+

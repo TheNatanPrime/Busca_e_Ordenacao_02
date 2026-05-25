@@ -1,5 +1,5 @@
+#ifndef NO_HPP
 #define NO_HPP
-#ifdef NO_HPP
 
 #include <unordered_map>
 #include <vector>
@@ -17,11 +17,12 @@ class No{
     int estado;
 
     No(int estado){
+        this->estado = estado;
 
-    this->estado = estado;
-
-    falha = nullptr;
+        falha = nullptr;
     }
+
+    
 };
 
 #endif

@@ -4,18 +4,15 @@
 #include <string>
 #include <vector>
 
-class KMP
-{
+class KMP{
 private:
     std::string palavra;
     std::vector<std::vector<int>> transicao;
-
     void construirAFD();
 
 public:
     KMP(std::string palavra);
-
-    std::vector<int> buscar(std::string texto);
+    std::vector<int> buscar(const std::string& texto);
 };
 
 #endif
