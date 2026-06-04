@@ -5,14 +5,9 @@
 #include "KMP.hpp"
 
 class Execucao{
-    private:
-        LerArquivo leitor;
-        void escolherAlgoritmo(int opcao);
+    public:
         void preKMP();
         void preCorasick();
-        int lerOpcao() const;
-    public:
-        void menuInicial();
 };
 
 #endif

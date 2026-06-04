@@ -3,51 +3,9 @@
 #include <vector>
 #include "Execucao.hpp"
 #include <string>
+#include "classesauxiliares/Uteis.hpp"
 
 using namespace std;
-
-void Execucao::menuInicial(){
-    int opcao;
-    do{
-        cout << "Menu" << endl << 
-        "1 - Buscar apenas uma palavra(KMP)"<< endl << 
-        "2 - Buscar mais de uma palavra(Aho-Corasik)" << endl << 
-        "0 - Finalizar" << endl <<
-        "Escolha uma opcao: ";
-        cin >> opcao;
-        escolherAlgoritmo(opcao);
-    } while(opcao != 0);
-}
-
-void Execucao::escolherAlgoritmo(int opcao){
-    switch(opcao){
-        case 1:
-            preKMP();
-            break;
-        case 2:
-            preCorasick();
-            break;
-        case 0:
-            cout << "Finalizando..." << endl;
-            break;
-        default:
-            cout << "Opcao invalida" << endl;
-    }
-}
-
-int Execucao::lerOpcao() const{
-    int opcao;
-    cin.clear();
-    while(!(cin >> opcao)){
-        cin.clear();
-        cout << "Entrada invalida. Digite um numero: ";
-    }
-    if(opcao < 0 || opcao > 1){
-        cout << "Opcao invalida" << endl;
-        opcao = 0;
-    }
-    return opcao;
-}
 
 void Execucao::preKMP()
 {
@@ -55,9 +13,9 @@ void Execucao::preKMP()
     do
     {
         try{
-            string nome = leitor.solicitarNomeArquivo();
-            auto texto = leitor.lerArquivo(nome);
-            leitor.removerTextoInicio(*texto);
+            string nome = LerArquivo::solicitarNomeArquivo();
+            auto texto = LerArquivo::lerArquivo(nome);
+            LerArquivo::removerTextoInicio(*texto);
 
             string palavra;
             cout << "Digite uma palavra para buscar: ";
@@ -75,7 +33,7 @@ void Execucao::preKMP()
         cout << "1 - Fazer uma nova busca." << endl << 
         "0 - Sair" << endl << 
         "Escolha uma opcao: ";
-        opcao = lerOpcao();
+        opcao = Utilidades::lerOpcao(0, 1);
     } while(opcao != 0);
 }
 
@@ -84,9 +42,9 @@ void Execucao::preCorasick()
     int opcao;
     do{
         try{
-            string nome = leitor.solicitarNomeArquivo();
-            auto texto = leitor.lerArquivo(nome);
-            leitor.removerTextoInicio(*texto);
+            string nome = LerArquivo::solicitarNomeArquivo();
+            auto texto = LerArquivo::lerArquivo(nome);
+            LerArquivo::removerTextoInicio(*texto);
 
             int quantidade;
             cout << "Quantas palavras deseja buscar: " << endl;
@@ -110,6 +68,6 @@ void Execucao::preCorasick()
         cout << "1 - Fazer uma nova busca." << endl << 
         "0 - Sair" << endl << 
         "Escolha uma opcao: ";
-        opcao = lerOpcao();
+        opcao = Utilidades::lerOpcao(0, 1);
     } while(opcao != 0);
 }
