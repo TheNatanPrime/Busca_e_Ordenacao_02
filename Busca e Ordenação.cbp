@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Busca e Ordenação" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Busca e Ordenação" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Busca e Ordenação" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Busca e Ordenação.cbp" />
+		<Unit filename="HashTable.copp" />
+		<Unit filename="Huffman.hpp" />
+		<Unit filename="algoritmos/AhoCorasick.cpp" />
+		<Unit filename="algoritmos/AhoCorasick.hpp" />
+		<Unit filename="algoritmos/Execucao.cpp" />
+		<Unit filename="algoritmos/Execucao.hpp" />
+		<Unit filename="algoritmos/HashTable.cpp" />
+		<Unit filename="algoritmos/HashTable.hpp" />
+		<Unit filename="algoritmos/Huffman.cpp" />
+		<Unit filename="algoritmos/Huffman.hpp" />
+		<Unit filename="algoritmos/KMP.cpp" />
+		<Unit filename="algoritmos/KMP.hpp" />
+		<Unit filename="algoritmos/No.hpp" />
+		<Unit filename="algoritmos/WordCloud.cpp" />
+		<Unit filename="algoritmos/WordCloud.hpp" />
+		<Unit filename="algoritmos/classesauxiliares/LerArquivo.cpp" />
+		<Unit filename="algoritmos/classesauxiliares/LerArquivo.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="textos/aovelhaeolobo.txt" />
+		<Unit filename="textos/crimeandpunishment.txt" />
+		<Unit filename="textos/mobydick.txt" />
+		<Unit filename="textos/quincasborba.txt" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

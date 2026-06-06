@@ -1,11 +1,12 @@
 #include "LerArquivo.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <filesystem>
 
 using namespace std;
 
-vector<string> LerArquivo::listarArquivos() {
+vector<string> LerArquivo::listarArquivos() const{
     vector<string> arquivos;
 
     if(!filesystem::exists("textos") || !filesystem::is_directory("textos")){
@@ -20,10 +21,26 @@ vector<string> LerArquivo::listarArquivos() {
     return arquivos;
 }
 
-string LerArquivo::solicitarNomeArquivo() {
+vector<string> LerArquivo::listarCompactados() const{
+    vector<string> arquivos;
+
+    if(!filesystem::exists("compactados") || !filesystem::is_directory("compactados")){
+        cout << "Pasta de textos nao encontrada" << endl;
+        return arquivos;
+    }
+
+    for(const auto& entrada : filesystem::directory_iterator("compactados")){
+        if(entrada.path().extension() == ".huff")
+            arquivos.push_back(entrada.path().stem().string());
+    }
+    return arquivos;
+}
+
+string LerArquivo::solicitarNomeArquivo() const{
     int nomearquivo;
     while(true){
-        auto arquivos = listarArquivos(); 
+
+        auto arquivos = listarArquivos();
 
         if(arquivos.empty())
             throw runtime_error("Nenhum arquivo .txt encontrado");
@@ -41,10 +58,10 @@ string LerArquivo::solicitarNomeArquivo() {
 
         if(lerArquivo(arquivos[nomearquivo - 1]).has_value())
             return arquivos[nomearquivo - 1];
-        
+
         cout << "Arquivo não encontrado" << endl;
-        cout << "1 - Abrir outro arquivo." << endl << 
-        "0 - Sair" << endl << 
+        cout << "1 - Abrir outro arquivo." << endl <<
+        "0 - Sair" << endl <<
         "Escolha uma opcao: ";
         int opcao;
         cin >> opcao;
@@ -53,13 +70,13 @@ string LerArquivo::solicitarNomeArquivo() {
     }
 }
 
-optional<string> LerArquivo::lerArquivo(const string& nome) {
+optional<string> LerArquivo::lerArquivo(const string& nome) const{
     ifstream arquivo("textos/" + nome + ".txt");
 
     if(!arquivo)
         return nullopt;
 
-    string texto, linha;
+    string texto,linha;
 
     while(getline(arquivo, linha)){
         texto += linha;
@@ -69,7 +86,7 @@ optional<string> LerArquivo::lerArquivo(const string& nome) {
     return texto;
 }
 
-void LerArquivo::removerTextoInicio(string &texto) {
+void LerArquivo::removerTextoInicio(string &texto) const{
     if(texto.size() >= 3 && (unsigned char)texto[0] == 239 && (unsigned char)texto[1] == 187 && (unsigned char)texto[2] == 191)
         texto.erase(0, 3);
 }

@@ -20,7 +20,9 @@ class No{
         this->estado = estado;
 
         falha = nullptr;
-    }    
+    }
+
+    
 };
 
 #endif

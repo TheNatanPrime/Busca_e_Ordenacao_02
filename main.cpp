@@ -1,8 +1,8 @@
-#include "algoritmos/Menus.hpp"
+#include "algoritmos/Execucao.hpp"
 
 int main()
 {
-    Menus menu;
+    Execucao menu;
     menu.menuInicial();
     return 0;
 }
