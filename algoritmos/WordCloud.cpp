@@ -40,7 +40,7 @@ void WordCloud::merge(vector<palavra>& v, int inicio, int meio, int fim){
         direita++;
     }
 
-    for(int i = 0; i < aux.size(); i++){
+    for(int i = 0; i < int(aux.size()); i++){
         v[inicio + i] = aux[i];
     }
 }
@@ -116,13 +116,10 @@ void WordCloud::processarArquivo(string nomeArquivo)
     }
 }
 
-void WordCloud::gerar()
-{
-    LerArquivo leitor;
-
+void WordCloud::gerar(){
     try
     {
-        vector<string> arquivos = leitor.listarArquivos();
+        vector<string> arquivos = LerArquivo::listarArquivos();
 
         if(arquivos.empty())
         {
@@ -132,7 +129,7 @@ void WordCloud::gerar()
 
         cout << "\nArquivos disponiveis: "<<endl;
 
-        for(int i = 0; i < arquivos.size(); i++)
+        for(int i = 0; i < int(arquivos.size()); i++)
         {
             cout << i + 1 << "-" << arquivos[i] << endl;
         }
@@ -149,14 +146,14 @@ void WordCloud::gerar()
 
             cin >> opcao;
 
-            if(opcao < 1 || opcao > arquivos.size())
+            if(opcao < 1 || opcao > int(arquivos.size()))
             {
                 cout << "opcao invalida" << endl;
                 i--;
                 continue;
             }
 
-            auto opcaotexto = leitor.lerArquivo(arquivos[opcao - 1]);
+            auto opcaotexto = LerArquivo::lerArquivo(arquivos[opcao - 1]);
 
             if(!opcaotexto.has_value())
             {
@@ -165,7 +162,7 @@ void WordCloud::gerar()
             }
             string texto = opcaotexto.value();
 
-            leitor.removerTextoInicio(texto);
+            LerArquivo::removerTextoInicio(texto);
 
             processarArquivo(texto);
 
@@ -190,7 +187,7 @@ void WordCloud::mostrarRanking(int quantidade)
 
     cout << "\nTop "<< quantidade << " palavras\n\n";
 
-    for(int i = 0; i< quantidade && i < palavras.size(); i++)
+    for(int i = 0; i< quantidade && i < int(palavras.size()); i++)
     {
         cout<<i+1<<"-"<< palavras[i].texto<<"->"<< palavras[i].frequencia<<endl;
 

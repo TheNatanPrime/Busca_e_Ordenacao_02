@@ -6,7 +6,7 @@
 
 using namespace std;
 
-vector<string> LerArquivo::listarArquivos() const{
+vector<string> LerArquivo::listarArquivos() {
     vector<string> arquivos;
 
     if(!filesystem::exists("textos") || !filesystem::is_directory("textos")){
@@ -21,7 +21,7 @@ vector<string> LerArquivo::listarArquivos() const{
     return arquivos;
 }
 
-vector<string> LerArquivo::listarCompactados() const{
+vector<string> LerArquivo::listarCompactados(){
     vector<string> arquivos;
 
     if(!filesystem::exists("compactados") || !filesystem::is_directory("compactados")){
@@ -36,11 +36,10 @@ vector<string> LerArquivo::listarCompactados() const{
     return arquivos;
 }
 
-string LerArquivo::solicitarNomeArquivo() const{
+string LerArquivo::solicitarNomeArquivo() {
     int nomearquivo;
     while(true){
-
-        auto arquivos = listarArquivos();
+        auto arquivos = listarArquivos(); 
 
         if(arquivos.empty())
             throw runtime_error("Nenhum arquivo .txt encontrado");
@@ -58,10 +57,10 @@ string LerArquivo::solicitarNomeArquivo() const{
 
         if(lerArquivo(arquivos[nomearquivo - 1]).has_value())
             return arquivos[nomearquivo - 1];
-
+        
         cout << "Arquivo não encontrado" << endl;
-        cout << "1 - Abrir outro arquivo." << endl <<
-        "0 - Sair" << endl <<
+        cout << "1 - Abrir outro arquivo." << endl << 
+        "0 - Sair" << endl << 
         "Escolha uma opcao: ";
         int opcao;
         cin >> opcao;
@@ -70,13 +69,13 @@ string LerArquivo::solicitarNomeArquivo() const{
     }
 }
 
-optional<string> LerArquivo::lerArquivo(const string& nome) const{
+optional<string> LerArquivo::lerArquivo(const string& nome) {
     ifstream arquivo("textos/" + nome + ".txt");
 
     if(!arquivo)
         return nullopt;
 
-    string texto,linha;
+    string texto, linha;
 
     while(getline(arquivo, linha)){
         texto += linha;
@@ -86,7 +85,7 @@ optional<string> LerArquivo::lerArquivo(const string& nome) const{
     return texto;
 }
 
-void LerArquivo::removerTextoInicio(string &texto) const{
+void LerArquivo::removerTextoInicio(string &texto) {
     if(texto.size() >= 3 && (unsigned char)texto[0] == 239 && (unsigned char)texto[1] == 187 && (unsigned char)texto[2] == 191)
         texto.erase(0, 3);
 }

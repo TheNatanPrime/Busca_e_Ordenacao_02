@@ -6,18 +6,12 @@
 #include "WordCloud.hpp"
 #include "Huffman.hpp"
 
-class Execucao
-{
-private:
-    LerArquivo leitor;
-    void escolherAlgoritmo(int opcao);
-    void preKMP();
-    void preCorasick();
-    void preWordCloud();
-    void preHuffman();
-    int lerOpcao() const;
-public:
-    void menuInicial();
+class Execucao{
+    public:
+        void preKMP();
+        void preCorasick();
+        void preWordCloud();
+        void preHuffman();
 };
 
 #endif

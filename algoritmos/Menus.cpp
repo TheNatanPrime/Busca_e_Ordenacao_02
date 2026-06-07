@@ -11,9 +11,11 @@ void Menus::menuInicial(){
         "1 - Buscar apenas uma palavra(KMP)"<< endl << 
         "2 - Buscar mais de uma palavra(Aho-Corasik)" << endl << 
         "3 - Simulador Penney's Game" << endl << 
+        "4 - Nuvem de palavras(WordCloud)" << endl <<
+        "5 - Compressão e descompressão(Huffman)" << endl <<
         "0 - Finalizar" << endl <<
         "Escolha uma opcao: ";
-        opcao = Utilidades::lerOpcao(0,3);
+        opcao = Utilidades::lerOpcao(0,5);
         escolherAlgoritmo(opcao);
     } while(opcao != 0);
 }
@@ -28,6 +30,12 @@ void Menus::escolherAlgoritmo(int opcao){
             break;
         case 3:
             simulador.menuSimuladorGame();
+            break;
+        case 4:
+            execucao.preWordCloud();
+            break;
+        case 5:
+            execucao.preHuffman();
             break;
         case 0:
             cout << "\nFinalizando...\n" << endl;

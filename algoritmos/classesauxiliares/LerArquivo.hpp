@@ -1,17 +1,16 @@
-#ifndef LerArquivo_HPP
-#define LerArquivo_HPP
+#ifndef LERARQUIVO_HPP
+#define LERARQUIVO_HPP
 
 #include <string>
 #include <optional>
 #include <vector>
 
-class LerArquivo{
-    public:
-        std::string solicitarNomeArquivo() const;
-        void removerTextoInicio(std::string &texto) const;
-        std::optional<std::string> lerArquivo(const std::string& nome) const;
-        std::vector <std::string> listarArquivos() const;
-        std::vector<std::string> listarCompactados() const;
-};
+namespace LerArquivo{
+        std::string solicitarNomeArquivo();
+        void removerTextoInicio(std::string &texto);
+        std::optional<std::string> lerArquivo(const std::string& nome);
+        std::vector<std::string> listarArquivos();
+        std::vector<std::string> listarCompactados();
+}
 
 #endif

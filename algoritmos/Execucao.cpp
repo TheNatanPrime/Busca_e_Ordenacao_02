@@ -3,78 +3,19 @@
 #include <vector>
 #include "Execucao.hpp"
 #include <string>
+#include "classesauxiliares/Uteis.hpp"
 
 using namespace std;
-
-void Execucao::menuInicial()
-{
-    int opcao;
-    do
-    {
-        cout << "Menu" << endl <<
-             "1 - Buscar apenas uma palavra(KMP)" << endl <<
-             "2 - Buscar mais de uma palavra(Aho-Corasik)" << endl <<
-             "3 - Nuvem de palavras(WordCloud)" << endl <<
-             "4 - Compressão e descompressão(Huffman)" << endl <<
-             "0 - Finalizar" << endl <<
-             "Escolha uma opcao: ";
-        cin >> opcao;
-        escolherAlgoritmo(opcao);
-    }
-    while(opcao != 0);
-}
-
-void Execucao::escolherAlgoritmo(int opcao)
-{
-    switch(opcao)
-    {
-    case 1:
-        preKMP();
-        break;
-    case 2:
-        preCorasick();
-        break;
-    case 3:
-        preWordCloud();
-        break;
-    case 4:
-        preHuffman();
-        break;
-    case 0:
-        cout << "Finalizando..." << endl;
-        break;
-    default:
-        cout << "Opcao invalida" << endl;
-    }
-}
-
-int Execucao::lerOpcao() const
-{
-    int opcao;
-    cin.clear();
-    while(!(cin >> opcao))
-    {
-        cin.clear();
-        cout << "Entrada invalida. Digite um numero: ";
-    }
-    if(opcao < 0 || opcao > 1)
-    {
-        cout << "Opcao invalida" << endl;
-        opcao = 0;
-    }
-    return opcao;
-}
 
 void Execucao::preKMP()
 {
     int opcao;
     do
     {
-        try
-        {
-            string nome = leitor.solicitarNomeArquivo();
-            auto texto = leitor.lerArquivo(nome);
-            leitor.removerTextoInicio(*texto);
+        try{
+            string nome = LerArquivo::solicitarNomeArquivo();
+            auto texto = LerArquivo::lerArquivo(nome);
+            LerArquivo::removerTextoInicio(*texto);
 
             string palavra;
             cout << "Digite uma palavra para buscar: ";
@@ -85,37 +26,32 @@ void Execucao::preKMP()
             for(int indice : indices)
                 cout << indice << endl;
         }
-        catch (const runtime_error& e)
-        {
+        catch (const runtime_error& e){
             cout << e.what() << endl;
             break;
         }
-        cout << "1 - Fazer uma nova busca." << endl <<
-             "0 - Sair" << endl <<
-             "Escolha uma opcao: ";
-        opcao = lerOpcao();
-    }
-    while(opcao != 0);
+        cout << "1 - Fazer uma nova busca." << endl << 
+        "0 - Sair" << endl << 
+        "Escolha uma opcao: ";
+        opcao = Utilidades::lerOpcao(0, 1);
+    } while(opcao != 0);
 }
 
 void Execucao::preCorasick()
 {
     int opcao;
-    do
-    {
-        try
-        {
-            string nome = leitor.solicitarNomeArquivo();
-            auto texto = leitor.lerArquivo(nome);
-            leitor.removerTextoInicio(*texto);
+    do{
+        try{
+            string nome = LerArquivo::solicitarNomeArquivo();
+            auto texto = LerArquivo::lerArquivo(nome);
+            LerArquivo::removerTextoInicio(*texto);
 
             int quantidade;
             cout << "Quantas palavras deseja buscar: " << endl;
             cin >> quantidade;
 
             AhoCorasick aho;
-            for(int i = 0; i < quantidade; i++)
-            {
+            for(int i = 0; i < quantidade; i++){
                 string palavra;
                 cout << "Digite a palavra "<< i+1<< ": ";
                 cin >> palavra;
@@ -125,23 +61,20 @@ void Execucao::preCorasick()
             aho.construirFalhas();
             aho.buscar(*texto);
         }
-        catch(const runtime_error& e)
-        {
+        catch(const runtime_error& e){
             cout << e.what() << endl;
             break;
         }
-        cout << "1 - Fazer uma nova busca." << endl <<
-             "0 - Sair" << endl <<
-             "Escolha uma opcao: ";
-        opcao = lerOpcao();
-    }
-    while(opcao != 0);
+        cout << "1 - Fazer uma nova busca." << endl << 
+        "0 - Sair" << endl << 
+        "Escolha uma opcao: ";
+        opcao = Utilidades::lerOpcao(0, 1);
+    } while(opcao != 0);
 }
 
 void Execucao::preWordCloud()
 {
     int opcao = 1;
-
     do
     {
         WordCloud nuvem;
@@ -151,9 +84,7 @@ void Execucao::preWordCloud()
              <<"0 - Sair"<<endl
              << "Escolha uma opcao: "<<endl;
 
-        cin >> opcao;
-        cout << endl;
-
+        opcao = Utilidades::lerOpcao(0, 1);
     }
     while(opcao != 0);
 }
@@ -164,18 +95,19 @@ void Execucao::preHuffman()
 
     do
     {
-        cout << "1 - Compactar arquivo" << endl << "2 - Descompactar arquivo" << endl
+        cout << "1 - Compactar arquivo" << endl << 
+        "2 - Descompactar arquivo" << endl
         << "0 - Voltar" << endl << "Opcao: ";
 
-        cin >> opcao;
+        opcao = Utilidades::lerOpcao(0, 2);
 
         switch(opcao)
         {
             case 1:
             {
-                string nome = leitor.solicitarNomeArquivo();
+                string nome = LerArquivo::solicitarNomeArquivo();
 
-                auto texto = leitor.lerArquivo(nome);
+                auto texto = LerArquivo::lerArquivo(nome);
 
                 if(!texto.has_value())
                 {
@@ -183,7 +115,7 @@ void Execucao::preHuffman()
                     break;
                 }
 
-                leitor.removerTextoInicio(*texto);
+                LerArquivo::removerTextoInicio(*texto);
 
                 Huffman h;
                 h.processarTexto(*texto, nome);
@@ -194,7 +126,7 @@ void Execucao::preHuffman()
             case 2:
             {
                 vector<string> arquivos =
-                    leitor.listarCompactados();
+                    LerArquivo::listarCompactados();
 
                 if(arquivos.empty())
                 {
