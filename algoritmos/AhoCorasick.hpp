@@ -15,6 +15,7 @@ class AhoCorasick{
         void inserir(const std::string& palavra);
         void construirFalhas();
         void buscar(const std::string& texto);
+        int medirBusca(const std::string& texto);
 
 };
 #endif

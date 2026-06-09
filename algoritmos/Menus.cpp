@@ -7,15 +7,16 @@ using namespace std;
 void Menus::menuInicial(){
     int opcao;
     do{
-        cout << "-------Menu-------" << endl << 
-        "1 - Buscar apenas uma palavra(KMP)"<< endl << 
-        "2 - Buscar mais de uma palavra(Aho-Corasik)" << endl << 
-        "3 - Simulador Penney's Game" << endl << 
+        cout << "-------Menu-------" << endl <<
+        "1 - Buscar apenas uma palavra(KMP)"<< endl <<
+        "2 - Buscar mais de uma palavra(Aho-Corasik)" << endl <<
+        "3 - Simulador Penney's Game" << endl <<
         "4 - Nuvem de palavras(WordCloud)" << endl <<
         "5 - Compressão e descompressão(Huffman)" << endl <<
+        "6 - Realizar Comparação" << endl <<
         "0 - Finalizar" << endl <<
         "Escolha uma opcao: ";
-        opcao = Utilidades::lerOpcao(0,5);
+        opcao = Utilidades::lerOpcao(0,6);
         escolherAlgoritmo(opcao);
     } while(opcao != 0);
 }
@@ -36,6 +37,9 @@ void Menus::escolherAlgoritmo(int opcao){
             break;
         case 5:
             execucao.preHuffman();
+            break;
+        case 6:
+            execucao.preComparacao();
             break;
         case 0:
             cout << "\nFinalizando...\n" << endl;

@@ -30,8 +30,8 @@ void Execucao::preKMP()
             cout << e.what() << endl;
             break;
         }
-        cout << "1 - Fazer uma nova busca." << endl << 
-        "0 - Sair" << endl << 
+        cout << "1 - Fazer uma nova busca." << endl <<
+        "0 - Sair" << endl <<
         "Escolha uma opcao: ";
         opcao = Utilidades::lerOpcao(0, 1);
     } while(opcao != 0);
@@ -65,8 +65,8 @@ void Execucao::preCorasick()
             cout << e.what() << endl;
             break;
         }
-        cout << "1 - Fazer uma nova busca." << endl << 
-        "0 - Sair" << endl << 
+        cout << "1 - Fazer uma nova busca." << endl <<
+        "0 - Sair" << endl <<
         "Escolha uma opcao: ";
         opcao = Utilidades::lerOpcao(0, 1);
     } while(opcao != 0);
@@ -95,7 +95,7 @@ void Execucao::preHuffman()
 
     do
     {
-        cout << "1 - Compactar arquivo" << endl << 
+        cout << "1 - Compactar arquivo" << endl <<
         "2 - Descompactar arquivo" << endl
         << "0 - Voltar" << endl << "Opcao: ";
 
@@ -174,4 +174,53 @@ void Execucao::preHuffman()
         }
 
     } while(opcao != 0);
+}
+
+void Execucao::preComparacao()
+{
+    try
+    {
+        string nome = LerArquivo::solicitarNomeArquivo();
+
+        auto texto = LerArquivo::lerArquivo(nome);
+
+        if(!texto.has_value())
+        {
+            cout << "Erro ao abrir arquivo" << endl;
+            return;
+        }
+
+        LerArquivo::removerTextoInicio(*texto);
+
+        int quantidade;
+
+        cout << "Quantas palavras deseja buscar? ";
+        cin >> quantidade;
+
+        vector<string> palavras;
+
+        for(int i = 0; i < quantidade; i++)
+        {
+            string palavra;
+
+            cout << "Digite a palavra "
+                 << i + 1
+                 << ": ";
+
+            cin >> palavra;
+
+            palavras.push_back(palavra);
+        }
+
+        ComparadorBuscas comparador;
+
+        comparador.executarComparacao(
+            *texto,
+            palavras
+        );
+    }
+    catch(const runtime_error& e)
+    {
+        cout << e.what() << endl;
+    }
 }

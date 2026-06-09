@@ -96,3 +96,29 @@ void AhoCorasick::buscar(const string& texto){
     }
 }
 
+int AhoCorasick::medirBusca(const string& texto)
+{
+    No* atual = raiz;
+
+    int total = 0;
+
+    for(int i = 0; i < int(texto.size()); i++)
+    {
+        char c = texto[i];
+
+        while(atual != raiz &&
+              atual->filhos.find(c) == atual->filhos.end())
+        {
+            atual = atual->falha;
+        }
+
+        if(atual->filhos.find(c) != atual->filhos.end())
+        {
+            atual = atual->filhos[c];
+        }
+
+        total += atual->saidas.size();
+    }
+
+    return total;
+}

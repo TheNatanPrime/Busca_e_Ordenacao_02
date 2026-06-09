@@ -5,6 +5,7 @@
 #include "KMP.hpp"
 #include "WordCloud.hpp"
 #include "Huffman.hpp"
+#include "ComparadorBuscas.hpp"
 
 class Execucao{
     public:
@@ -12,6 +13,7 @@ class Execucao{
         void preCorasick();
         void preWordCloud();
         void preHuffman();
+        void preComparacao();
 };
 
 #endif

@@ -71,7 +71,7 @@ void WordCloud::carregarStopwords()
                                         "he", "she", "it", "that", "you", "was", "his", "her",
                                         "but", "not", "with", "for", "had", "him",
                                         "all", "have", "what", "are", "from", "they",
-                                        "this", "your", "their", "which"
+                                        "this", "your", "their", "which", "will", "when", "them", "will"
                                        };
 
     for(string p : palavrasProibidas)
