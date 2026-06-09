@@ -33,6 +33,8 @@
 		</Compiler>
 		<Unit filename="algoritmos/AhoCorasick.cpp" />
 		<Unit filename="algoritmos/AhoCorasick.hpp" />
+		<Unit filename="algoritmos/ComparadorBuscas.cpp" />
+		<Unit filename="algoritmos/ComparadorBuscas.hpp" />
 		<Unit filename="algoritmos/Execucao.cpp" />
 		<Unit filename="algoritmos/Execucao.hpp" />
 		<Unit filename="algoritmos/HashTable.cpp" />

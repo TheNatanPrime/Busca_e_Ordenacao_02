@@ -11,6 +11,12 @@ AhoCorasick::AhoCorasick()
     raiz = new No(contadorEstados++);
 }
 
+AhoCorasick::~AhoCorasick()
+{
+    destruir(raiz);
+}
+
+
 void AhoCorasick::inserir(const string& palavra)
 {
     No* atual = raiz;
@@ -121,4 +127,17 @@ int AhoCorasick::medirBusca(const string& texto)
     }
 
     return total;
+}
+
+void AhoCorasick::destruir(No* no)
+{
+    if(no == nullptr)
+        return;
+
+    for(auto par : no->filhos)
+    {
+        destruir(par.second);
+    }
+
+    delete no;
 }

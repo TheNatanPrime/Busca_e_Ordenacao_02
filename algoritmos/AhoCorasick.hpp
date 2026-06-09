@@ -10,8 +10,11 @@ class AhoCorasick{
         No* raiz;
         int contadorEstados;
 
+        void destruir(No* no);
+
     public:
         AhoCorasick();
+        ~AhoCorasick();
         void inserir(const std::string& palavra);
         void construirFalhas();
         void buscar(const std::string& texto);
